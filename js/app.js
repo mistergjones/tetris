@@ -64,6 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function control(e) {
         if (e.keyCode === 39) moveright();
         else if (e.keyCode === 38) {
+            // check to see if the shape can rotate whilst at the edges.
             if (canIrotate === true) {
                 rotate();
                 canLrotate = false;
@@ -83,6 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
         [GRID_WIDTH, GRID_WIDTH * 2, GRID_WIDTH * 2 + 1, GRID_WIDTH * 2 + 2],
     ];
 
+    // the scond l Tetromnio
     const gTetromino = [
         [1, 2, GRID_WIDTH + 2, GRID_WIDTH * 2 + 2],
         [GRID_WIDTH, GRID_WIDTH + 1, GRID_WIDTH + 2, GRID_WIDTH * 2],
@@ -96,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
         [0, GRID_WIDTH, GRID_WIDTH + 1, GRID_WIDTH * 2 + 1],
         [GRID_WIDTH + 1, GRID_WIDTH + 2, GRID_WIDTH * 2, GRID_WIDTH * 2 + 1],
     ];
-
+    // the second z tetromnio
     const z2Tetromino = [
         [1, GRID_WIDTH + 1, GRID_WIDTH, GRID_WIDTH * 2],
         [0, 1, GRID_WIDTH + 1, GRID_WIDTH + 2],
@@ -125,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
         [GRID_WIDTH, GRID_WIDTH + 1, GRID_WIDTH + 2, GRID_WIDTH + 3],
     ];
 
-    // array pos: 1=lTet, 2=zTet, 3=tTet, 4=oTet, 5=iTet
+    // array pos: 1=lTet, 2=zTet, 3=tTet, 4=oTet, 5=iTet, 6=gTet, 7=z2Tet
     const theTetrominoes = [
         lTetromino,
         zTetromino,
@@ -179,6 +181,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    // these functions prevent a user from rotation if the shape is at each each of the grid. This will prevent bleeding on the other side.
     function canITetrominoRotateRight() {
         if (currentPosition % 10 > 6) {
             canIrotate = false;
@@ -307,6 +310,7 @@ document.addEventListener("DOMContentLoaded", () => {
         );
         if (!isAtRightEdge) currentPosition += 1;
 
+        // determine if we need to prevent the shape from rotation at each edge.
         switch (random) {
             case 0: // let tet
                 canLTetrominoRotateRight();
@@ -348,7 +352,7 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
         if (!isAtLeftEdge) currentPosition -= 1;
-
+        // determine if we need to prevent the shape from rotation at each edge.
         switch (random) {
             case 0:
                 canLTetrominoRotateLeft();
